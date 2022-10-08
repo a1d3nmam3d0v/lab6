@@ -40,11 +40,15 @@ def show_4cast(weather_data):
         wind_speed = data["wind"]["speed"]
 
         timestamp = data["dt"]
-        date_time = datetime.fromtimestamp(timestamp)
-        # PART 2  - I didn't see this question until now so I didn't know we had to choose MN or UTC time
-        # I never liked the way timestamps are formatted so I looked up a way to change it and found this strftime method
+        date_time = datetime.fromtimestamp(timestamp) # part 2
+        # I didn't see this question until now so I didn't know we had to choose MN or UTC time
+        # I never liked the way timestamps look so I looked up a way to change them and found this strftime method
+        # (before I saw the question) 
         date = date_time.strftime("%x")  # "locale's appropriate date"
         time = date_time.strftime("%X")  # "locale's appropriate  time"
+        # In general though the one I'd go with probably depends on the scale of the project
+        # for something that might be seen by people in different time zones I'd go with UTC
+        # especially  because it easily converts to local time
 
         weather_key_list = weather_data["list"][0]["weather"]
         description = (item["description"] for item in weather_key_list)
@@ -59,3 +63,11 @@ def show_4cast(weather_data):
 
 
 main()
+
+# part 3 
+# print is for messages intended for the user to see
+# shouldn't be technical, shouldn't reveal the innerworkings of the program
+# if there's an error that happens print an exit message to the user but no need to print the exception error for instance
+# written for the average person to understand to assist with using your program
+# logging is for helping you debug and diagnose your program and to track how it's running 
+# never log sensitive info 
